@@ -70,7 +70,7 @@ function check_cookie_file {
 
 function check_setup {
 	strfile_script=$_cowtip_dir/setup.sh
-	echo -e '#!/bin/bash\n' > $strfile_script
+	echo -e '#!/bin/sh\n' > $strfile_script
 	echo -e 'if ! which strfile > /dev/null \nthen' >> $strfile_script
 	echo -e '\techo "I cannot find the strfile binary (it should have been installed with fortune)" 1>&2' >> $strfile_script
 	echo -e '\texit 1' >> $strfile_script
