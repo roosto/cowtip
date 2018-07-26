@@ -22,9 +22,13 @@ Once you have those, you’ll need to run `strfile` to make `.dat ` files from t
 
 N.B. if you make changes to the `fortune` cookie files, you’ll have to go through these setup steps again.
 
-Lastly, for maximum fun, I would suggest that you run this script at login by putting something like this in your `.bash_profile`:
+Lastly, for maximum fun, I would suggest that you run this script at login by putting something like this in your `.bash_profile` (assuming you put this in your home dir):
 
-    shopt -q login_shell && ~/cowtip/cowtip.bash
+    ~/cowtip/cowtip.bash
+
+or use this to limit its execution to login shells only:
+
+    shopt -q login_shell && ~/cowtip/cowtip.bash # only for login shells, please
 
 ## Configuration ##
 
