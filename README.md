@@ -6,6 +6,8 @@ Author: Dustin Goldman, `dusto@goldmans.net`
 [@roosto on github](https://github.com/roosto)
 [@roosto on twitter•com](https://twitter.com/roosto)
 
+[Github repo for this project](https://github.com/roosto/cowtip)
+
 ## Description
 
 This is designed to be run when logging in. And can be invoked by simply running `cowtip/cowtip.bash` (with no args).
