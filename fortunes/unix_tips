@@ -1,0 +1,52 @@
+%
+Process Listing:
+Instead of:
+`ps aux | grep 'process_name' | fgrep -v 'grep'`
+Save yourself an extra invocation of `grep` with:
+`ps aux | grep '[p]rocess_name'`
+%
+Weirdo Filenames:
+It can be tough to process filenames that contain spaces or other special
+characters. Many utilities have the ability to output or consume lists
+with each item terminated by a NULL character instead of whitespace.
+
+example:
+`find . -print0 -name '* *' | xargs -0 rm`
+%
+The More You Know(tm):
+`grep`, `fgrep`, `egrep`, `zgrep`, etc. are all the same binary. This
+works because `argv[0]` is examined on invocation and behavior changes
+based on its value.
+%
+Best Practice:
+Avoid piping the output of `grep` to `wc -l`, if you are looking for a
+total count of matching lines in a single source (file or STDIN).
+`grep -c` is much faster for this task.
+%
+`fgrep`:
+Do you know about `fgrep`? It works just like `grep`, except search
+strings are literal; i.e., regular expression meta characters are matched
+literally.
+
+It is often simpler, and in the case of a shell script clearer, to use
+`fgrep` instead of backslash escaping meta characters in a `grep` search
+pattern.
+%
+`grep`:
+
+You can specify multiple search patterns with `-e`. (`-e` is also the way
+to use `grep` to search for a a pattern that begins with '-')
+
+example:
+`grep -e 'use [^;]*;$' -e 'require [^;]*;$' *.pl`
+%
+`xargs`:
+The `-J replstr` option allows you to control where in the resulting
+command any input to `xargs` will be placed.
+
+example (moving all PNGs into one directory [N.B. this example command is
+    dangerous, as it may silently overwrite files]):
+
+`find . -type f -name '*png' | xargs -J % mv % /var/www/html/assets/images`
+%
+

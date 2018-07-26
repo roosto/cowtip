@@ -1,0 +1,80 @@
+%
+Bash tip:
+`$ ^find string^replacement string^`
+
+searches through the last run command for `found string` replaces the
+first found instance with `replacement string` and runs the resulting
+command. You may omit the final `^` if `replacement string` contains
+no whitespace.
+%
+Bash tip:
+`<meta> .`
+
+places the last argument to the last run command at the insertion point in
+your current command. Repeatedly pressing `<meta> .` will continue moving
+backwards through your history inserting the last argument from each
+command.
+%
+Bash tip:
+`<(cmd)`
+
+runs `cmd` attaching its STDOUT to an anonymous named FIFO and puts the
+filename of the FIFO on the command line. Some examples of how this might
+be useful:
+
+`diff <(curl http://example.com/json_old | jsonpp) \
+	<(curl http://example.com/json_new | jsonpp)`
+
+`grep -r -f \
+	<( \
+		find SiteSpect/Lib/Admin -name '*pm' | \
+		sed -e's#/#::#g' -e 's#.pm$##g' \
+	) \
+	SiteSpect/Util/*pl`
+%
+Bash tip:
+`<meta> *`
+
+Replace the current token with all possible completions. Example:
+Given a dir containing: mydir/ mydir.tar mydir.tar.gz
+If your command line is:
+`$ rm mydi[]`
+typing `<meta> *` will result in:
+`$ rm mydir/ mydir.tar mydir.tar.gz []`
+
+Useful for excluding just a few files from a command without the need to
+construct a complex glob string or pipe chain.
+%
+Bash tip:
+`<meta> !`
+
+Performs completion using possible commands. Bash will typically only do
+completion in context (file, variable name, etc.), this overrides the
+assumed context and instead uses available commands. An example:
+
+Where is the `ssh-keyscan` binary? With `$ which ssh-keys[]` typing
+`<tab>` would normally attempt to complete `ssh-keys` with matching files
+in the current working directory. Using `<meta> !` will instead complete
+with defined aliases, functions, or executables from PATH.
+%
+Bash tip:
+`type`
+
+It's like `which`, but better. Unlike `which`, `type` is a shell builtin
+& will also look at aliases and functions defined in the current shell
+environment. `type` will give you the definition of a matching alias or
+function instead of the location of the same matching executable in your
+PATH (because aliases and functions supersede executables in PATH).
+
+example:
+`which mysql` -> /usr/bin/mysql
+`type mysql`  -> mysql is aliased to `/usr/bin/mysql --i-am-a-dummy`
+%
+Bash tip:
+Use bash's brace expansion for quick invocations of `mv` or `cp`
+
+example:
+`cp /big/old/path/to/my/file.txt{,.bak}`
+expands to:
+`cp /big/old/path/to/my/file.txt /big/old/path/to/my/file.txt.bak`
+%
