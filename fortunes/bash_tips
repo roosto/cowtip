@@ -2,7 +2,7 @@
 Bash tip:
 `$ ^find string^replacement string^`
 
-searches through the last run command for `found string` replaces the
+searches through the last run command for `find string` replaces the
 first found instance with `replacement string` and runs the resulting
 command. You may omit the final `^` if `replacement string` contains
 no whitespace.
@@ -22,15 +22,19 @@ runs `cmd` attaching its STDOUT to an anonymous named FIFO and puts the
 filename of the FIFO on the command line. Some examples of how this might
 be useful:
 
+# compare results of two API calls
 `diff <(curl http://example.com/json_old | jsonpp) \
 	<(curl http://example.com/json_new | jsonpp)`
 
+# find all perl modules inside `my/pm/dir`, transform those filepaths into
+# Perl module names, and search for any references to those modules from
+# perl scripts in `my/scripts/dir`
 `grep -r -f \
 	<( \
-		find SiteSpect/Lib/Admin -name '*pm' | \
+		find my/PMs/dir -name '*.pm' | \
 		sed -e's#/#::#g' -e 's#.pm$##g' \
 	) \
-	SiteSpect/Util/*pl`
+	my/scripts/dir/*.pl`
 %
 Bash tip:
 `<meta> *`
